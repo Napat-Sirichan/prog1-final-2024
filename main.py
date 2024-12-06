@@ -11,7 +11,6 @@ class Ball:
         self.vx = vx
         self.vy = vy
         self.color = color
-        self.mass = 100*size**2
         self.count = 0
         self.id = id
         self.canvas_width = turtle.screensize()[0]
@@ -46,7 +45,7 @@ class Ball:
         if abs(self.y) > (self.canvas_height - self.size):
             self.bounce_off_vertical_wall()
 
-    def move(self, dt = 1 ):
+    def move(self, dt = 4 ):
         self.x += self.vx*dt
         self.y += self.vy*dt
 
@@ -251,7 +250,7 @@ class Number :
         self.tom.clear()
 
     @staticmethod
-    def my_delay(dt = 0.2):
+    def my_delay(dt = 0.1):
         start =  time.time()
         while time.time() - start < dt:
             pass
@@ -267,6 +266,7 @@ if __name__ == "__main__":
     vx = []
     vy = []
     ball_color = []
+    ball = []
     for i in range(0,5):
         xpos.append(random.uniform(-1*canvas_width + ball_radius, canvas_width - ball_radius))
         ypos.append(random.uniform(-1*canvas_height + ball_radius, canvas_height - ball_radius))
@@ -276,25 +276,26 @@ if __name__ == "__main__":
 
     turtle.clear()
     
-    
+    for i in range(5):
+            
+        ball.append(Ball(color = ball_color[i], size = ball_radius,x =  xpos[i], y = ypos[i], id = i , vx = vx[i] ,vy = vy[i] ))
+            
     tom = turtle.Turtle()
     num = Number(tom) 
     num.install()
     while True:
         for i in range(5):
-            
-            ball  = Ball(color = ball_color[i], size = ball_radius,x =  xpos[i], y = ypos[i], id = i , vx = vx[i] ,vy = vy[i] )
-            ball.draw_border()
-            ball.draw()
-            ball.move()
-            ball.update_ball_velocity()
-            
+            ball[i].draw_border()
+            ball[i].move()
+            ball[i].draw()
+            ball[i].update_ball_velocity()
             turtle.update()
         for i in range(0, 10):
             num.clear()
             num.draw(digit = i)
             num.my_delay()
             turtle.update()
+
 
 turtle.done()
     
