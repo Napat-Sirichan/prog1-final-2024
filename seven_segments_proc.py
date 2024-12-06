@@ -6,6 +6,10 @@ def init(my_turtle, color):
     turtle.hideturtle()
     turtle.colormode(255)
     
+    
+    my_turtle = turtle.Turtle()
+
+
     my_turtle.color(color)
     my_turtle.penup()
     my_turtle.setheading(0)
